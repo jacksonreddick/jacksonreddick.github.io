@@ -227,66 +227,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">INTpercentage =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Int%</span><span class="st">`</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reverse</span>() <span class="sc">+</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>goff <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jared Goff"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>hurts <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jalen Hurts"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>fields <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Justin Fields"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Wins <span class="sc">~</span> INTpercentage, <span class="at">data =</span> percentages)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reverse</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>goff, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>goff, <span class="fu">aes</span>(<span class="at">x=</span><span class="fl">1.0</span>, <span class="at">y=</span><span class="dv">8</span>, <span class="at">label=</span><span class="st">"Jared Goff"</span>), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>hurts, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>hurts, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins, <span class="at">label=</span><span class="st">"Jalen Hurts"</span>), <span class="at">color=</span><span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>fields, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>fields, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins, <span class="at">label=</span><span class="st">"Justin Fields"</span>), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"QB INT% in 2022"</span>, <span class="at">y=</span><span class="st">"QB Wins"</span>, <span class="at">title=</span><span class="st">"NFL QB INT% in Correlation to Wins"</span>, <span class="at">subtitle=</span><span class="st">"When Jared Goff took care of the football, the Lions won games"</span>, <span class="at">caption=</span><span class="st">"Source: Pro Football Reference | By Jackson Reddick"</span>) <span class="sc">+</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Wins ~ INTpercentage, data = percentages)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.4237 -1.8561 -0.4827  0.7852  5.9350 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     11.918      1.973   6.041  2.6e-06 ***
-INTpercentage   -1.941      0.873  -2.223   0.0355 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.129 on 25 degrees of freedom
-Multiple R-squared:  0.1651,    Adjusted R-squared:  0.1317 
-F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>goff <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jared Goff*"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>hurts <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jalen Hurts*"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fields <span class="ot">&lt;-</span> percentages <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Justin Fields"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reverse</span>() <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>percentages, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>goff, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>goff, <span class="fu">aes</span>(<span class="at">x=</span><span class="fl">1.0</span>, <span class="at">y=</span><span class="dv">8</span>, <span class="at">label=</span><span class="st">"Jared Goff"</span>), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>hurts, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"green"</span>) <span class="sc">+</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>hurts, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins, <span class="at">label=</span><span class="st">"Jalen Hurts"</span>), <span class="at">color=</span><span class="st">"green"</span>) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>fields, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>fields, <span class="fu">aes</span>(<span class="at">x=</span>INTpercentage, <span class="at">y=</span>Wins, <span class="at">label=</span><span class="st">"Justin Fields"</span>), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"QB INT% in 2022"</span>, <span class="at">y=</span><span class="st">"QB Wins"</span>, <span class="at">title=</span><span class="st">"NFL QB INT% in Correlation to Wins"</span>, <span class="at">subtitle=</span><span class="st">"When Jared Goff took care of the football, the Lions won games"</span>, <span class="at">caption=</span><span class="st">"Source: Pro Football Reference | By Jackson Reddick"</span>) <span class="sc">+</span> </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>When Jared Goff took care of the football, good things happened. Maybe Nebraska should take a play out that playbook… sorry to throw a stray Nebraska. But Goff and the Lions were a different team when he protected the ball, as Goff didn’t throw and INT from Week 9 to the end of the season.</p>
@@ -294,49 +266,45 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2022nfladvancedqb.csv"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>logs, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC, <span class="at">group=</span>Tm)) <span class="sc">+</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2022nfladvancedqb.csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>goff1 <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"DET"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>cousins <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"MIN"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>mahomes <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"KAN"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>herbert <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"LAC"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>rodgers <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"GNB"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>burrow <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"CIN"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>goff1 <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"DET"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cousins <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"MIN"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mahomes <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"KAN"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>herbert <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"LAC"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>rodgers <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"GNB"</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>burrow <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> <span class="fu">filter</span>(Tm <span class="sc">==</span> <span class="st">"CIN"</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>logs, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC, <span class="at">group=</span>Tm), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">122.20</span>, <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>goff1, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#0076B6"</span>) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>cousins, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#4F2683"</span>) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mahomes, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FFB81C"</span>) <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>herbert, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FFC20E"</span>) <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>rodgers, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#203731"</span>) <span class="sc">+</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>burrow, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FB4F14"</span>) <span class="sc">+</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>)) <span class="sc">+</span> </span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tm) <span class="sc">+</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"QB Passing Yards in a Game"</span>, <span class="at">y=</span><span class="st">"Yards After Catch for each game"</span>, <span class="at">title=</span><span class="st">"How inflated QB Passing Yards are due to YAC"</span>, <span class="at">subtitle=</span><span class="st">"Jared Goff is in the middle of being aided by scheme, but also being a good QB"</span>, <span class="at">caption=</span><span class="st">"Source: Pro Football Reference | By Jackson Reddick"</span>) <span class="sc">+</span> </span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>logs, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC, <span class="at">group=</span>Tm), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">122.20</span>, <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>goff1, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#0076B6"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>cousins, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#4F2683"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mahomes, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FFB81C"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>herbert, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FFC20E"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>rodgers, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#203731"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>burrow, <span class="fu">aes</span>(<span class="at">x=</span>Yds, <span class="at">y=</span>YAC), <span class="at">color=</span><span class="st">"#FB4F14"</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">300</span>)) <span class="sc">+</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Tm) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"QB Passing Yards in a Game"</span>, <span class="at">y=</span><span class="st">"Yards After Catch for each game"</span>, <span class="at">title=</span><span class="st">"How inflated QB Passing Yards are due to YAC"</span>, <span class="at">subtitle=</span><span class="st">"Jared Goff is in the middle of being aided by scheme, but also being a good QB"</span>, <span class="at">caption=</span><span class="st">"Source: Pro Football Reference | By Jackson Reddick"</span>) <span class="sc">+</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Goff is pretty much in the middle ground, as Amon-Ra St.&nbsp;Brown is the main reason that the YAC is up so high. The average YAC per game was 122.20 yards in a game, and Goff was pretty steady in that number, as he played within the scheme the Lions wanted to run. As with Mahomes, a ton of that is just Travis Kelce refusing to be tackled most times.</p>
@@ -344,26 +312,567 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2022nflqbs.csv"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>touchdowns <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Player) <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">touchdowns=</span><span class="fu">sum</span>(TD)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>touchdowns) <span class="sc">|&gt;</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">desc</span>(touchdowns))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>touchdowns <span class="sc">|&gt;</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">touchdowns =</span> <span class="st">"Passing Touchdowns"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"2022 Top Ten NFL QB TD Passes"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"So Jared Goff is with pretty damn good company"</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Jackson Reddick  |  **Source:** Pro Football Reference"</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#0076B6"</span>),</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Jared Goff"</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="jgvdxscszr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jgvdxscszr table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jgvdxscszr thead, #jgvdxscszr tbody, #jgvdxscszr tfoot, #jgvdxscszr tr, #jgvdxscszr td, #jgvdxscszr th {
+  border-style: none;
+}
+
+#jgvdxscszr p {
+  margin: 0;
+  padding: 0;
+}
+
+#jgvdxscszr .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: none;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jgvdxscszr .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jgvdxscszr .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jgvdxscszr .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jgvdxscszr .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jgvdxscszr .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jgvdxscszr .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jgvdxscszr .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jgvdxscszr .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jgvdxscszr .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jgvdxscszr .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jgvdxscszr .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jgvdxscszr .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jgvdxscszr .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jgvdxscszr .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jgvdxscszr .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jgvdxscszr .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jgvdxscszr .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jgvdxscszr .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jgvdxscszr .gt_first_summary_row {
+  border-top-style: none;
+  border-top-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jgvdxscszr .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jgvdxscszr .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: none;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jgvdxscszr .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jgvdxscszr .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jgvdxscszr .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jgvdxscszr .gt_left {
+  text-align: left;
+}
+
+#jgvdxscszr .gt_center {
+  text-align: center;
+}
+
+#jgvdxscszr .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jgvdxscszr .gt_font_normal {
+  font-weight: normal;
+}
+
+#jgvdxscszr .gt_font_bold {
+  font-weight: bold;
+}
+
+#jgvdxscszr .gt_font_italic {
+  font-style: italic;
+}
+
+#jgvdxscszr .gt_super {
+  font-size: 65%;
+}
+
+#jgvdxscszr .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jgvdxscszr .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jgvdxscszr .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jgvdxscszr .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jgvdxscszr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jgvdxscszr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jgvdxscszr .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="2" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">2022 Top Ten NFL QB TD Passes</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">So Jared Goff is with pretty damn good company</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col" id="Player">Player</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col" id="Passing Touchdowns">Passing Touchdowns</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Player" class="gt_row gt_left">Patrick Mahomes</td>
+<td headers="touchdowns" class="gt_row gt_right">41</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Joe Burrow</td>
+<td headers="touchdowns" class="gt_row gt_right gt_striped">35</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left">Josh Allen</td>
+<td headers="touchdowns" class="gt_row gt_right">35</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Geno Smith</td>
+<td headers="touchdowns" class="gt_row gt_right gt_striped">30</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left" style="background-color: #0076B6; color: #FFFFFF;">Jared Goff</td>
+<td headers="touchdowns" class="gt_row gt_right" style="background-color: #0076B6; color: #FFFFFF;">29</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Kirk Cousins</td>
+<td headers="touchdowns" class="gt_row gt_right gt_striped">29</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left">Aaron Rodgers</td>
+<td headers="touchdowns" class="gt_row gt_right">26</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Justin Herbert</td>
+<td headers="touchdowns" class="gt_row gt_right gt_striped">25</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left">Tom Brady</td>
+<td headers="touchdowns" class="gt_row gt_right">25</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Trevor Lawrence</td>
+<td headers="touchdowns" class="gt_row gt_right gt_striped">25</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left">Tua Tagovailoa</td>
+<td headers="touchdowns" class="gt_row gt_right">25</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="2"><strong>By:</strong> Jackson Reddick  |  <strong>Source:</strong> Pro Football Reference</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+</div>
+</div>
+<p>So looking at this you’d think, eh Goff played a good year, but 29 touchdowns on a top ten NFL offense, where did all the other touchdowns go?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"2022nflqbs.csv"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>logs2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"nfl2022rbs.csv"</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>touchdowns <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>touchdowns2 <span class="ot">&lt;-</span> logs2 <span class="sc">|&gt;</span> </span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Player) <span class="sc">|&gt;</span> </span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">touchdowns=</span><span class="fu">sum</span>(TD)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>touchdowns) <span class="sc">|&gt;</span> </span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">desc</span>(touchdowns))</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>touchdowns <span class="sc">|&gt;</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>touchdowns2 <span class="sc">|&gt;</span> </span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">touchdowns =</span> <span class="st">"Passing Touchdowns"</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">touchdowns =</span> <span class="st">"Rushing Touchdowns"</span></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"2022 Top Ten NFL QB TD Passes"</span>,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"So Jared Goff is with pretty damn good company"</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"2022 Top Ten NFL RB Rushing TDs"</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"So Jared Goff could have thrown a lot more touchdowns..."</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
@@ -389,28 +898,28 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
 <span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
 <span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      ),</span>
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Jared Goff*"</span>)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Jamaal Williams"</span>)</span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="xpjuncovnv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xpjuncovnv table {
+<div id="fkbykjwxpu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fkbykjwxpu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xpjuncovnv thead, #xpjuncovnv tbody, #xpjuncovnv tfoot, #xpjuncovnv tr, #xpjuncovnv td, #xpjuncovnv th {
+#fkbykjwxpu thead, #fkbykjwxpu tbody, #fkbykjwxpu tfoot, #fkbykjwxpu tr, #fkbykjwxpu td, #fkbykjwxpu th {
   border-style: none;
 }
 
-#xpjuncovnv p {
+#fkbykjwxpu p {
   margin: 0;
   padding: 0;
 }
 
-#xpjuncovnv .gt_table {
+#fkbykjwxpu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -436,12 +945,12 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xpjuncovnv .gt_caption {
+#fkbykjwxpu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xpjuncovnv .gt_title {
+#fkbykjwxpu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -453,7 +962,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-bottom-width: 0;
 }
 
-#xpjuncovnv .gt_subtitle {
+#fkbykjwxpu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -465,7 +974,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-top-width: 0;
 }
 
-#xpjuncovnv .gt_heading {
+#fkbykjwxpu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -477,13 +986,13 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpjuncovnv .gt_bottom_border {
+#fkbykjwxpu .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xpjuncovnv .gt_col_headings {
+#fkbykjwxpu .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -498,7 +1007,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpjuncovnv .gt_col_heading {
+#fkbykjwxpu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -518,7 +1027,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   overflow-x: hidden;
 }
 
-#xpjuncovnv .gt_column_spanner_outer {
+#fkbykjwxpu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -530,15 +1039,15 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 4px;
 }
 
-#xpjuncovnv .gt_column_spanner_outer:first-child {
+#fkbykjwxpu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xpjuncovnv .gt_column_spanner_outer:last-child {
+#fkbykjwxpu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xpjuncovnv .gt_column_spanner {
+#fkbykjwxpu .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -550,11 +1059,11 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   width: 100%;
 }
 
-#xpjuncovnv .gt_spanner_row {
+#fkbykjwxpu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xpjuncovnv .gt_group_heading {
+#fkbykjwxpu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -580,7 +1089,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   text-align: left;
 }
 
-#xpjuncovnv .gt_empty_group_heading {
+#fkbykjwxpu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -595,15 +1104,15 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   vertical-align: middle;
 }
 
-#xpjuncovnv .gt_from_md > :first-child {
+#fkbykjwxpu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xpjuncovnv .gt_from_md > :last-child {
+#fkbykjwxpu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xpjuncovnv .gt_row {
+#fkbykjwxpu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -622,7 +1131,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   overflow-x: hidden;
 }
 
-#xpjuncovnv .gt_stub {
+#fkbykjwxpu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -635,548 +1144,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 5px;
 }
 
-#xpjuncovnv .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#xpjuncovnv .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#xpjuncovnv .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#xpjuncovnv .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpjuncovnv .gt_first_summary_row {
-  border-top-style: none;
-  border-top-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#xpjuncovnv .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpjuncovnv .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: none;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: none;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#xpjuncovnv .gt_table_body {
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpjuncovnv .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#xpjuncovnv .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpjuncovnv .gt_left {
-  text-align: left;
-}
-
-#xpjuncovnv .gt_center {
-  text-align: center;
-}
-
-#xpjuncovnv .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#xpjuncovnv .gt_font_normal {
-  font-weight: normal;
-}
-
-#xpjuncovnv .gt_font_bold {
-  font-weight: bold;
-}
-
-#xpjuncovnv .gt_font_italic {
-  font-style: italic;
-}
-
-#xpjuncovnv .gt_super {
-  font-size: 65%;
-}
-
-#xpjuncovnv .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#xpjuncovnv .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#xpjuncovnv .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#xpjuncovnv .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#xpjuncovnv .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#xpjuncovnv .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#xpjuncovnv .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="2" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">2022 Top Ten NFL QB TD Passes</td>
-    </tr>
-    <tr class="gt_heading">
-      <td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">So Jared Goff is with pretty damn good company</td>
-    </tr>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col" id="Player">Player</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col" id="Passing Touchdowns">Passing Touchdowns</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Player" class="gt_row gt_left">Patrick Mahomes*+</td>
-<td headers="touchdowns" class="gt_row gt_right">41</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Joe Burrow*</td>
-<td headers="touchdowns" class="gt_row gt_right gt_striped">35</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Josh Allen*</td>
-<td headers="touchdowns" class="gt_row gt_right">35</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Geno Smith*</td>
-<td headers="touchdowns" class="gt_row gt_right gt_striped">30</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left" style="background-color: #0076B6; color: #FFFFFF;">Jared Goff*</td>
-<td headers="touchdowns" class="gt_row gt_right" style="background-color: #0076B6; color: #FFFFFF;">29</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Kirk Cousins*</td>
-<td headers="touchdowns" class="gt_row gt_right gt_striped">29</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Aaron Rodgers</td>
-<td headers="touchdowns" class="gt_row gt_right">26</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Justin Herbert</td>
-<td headers="touchdowns" class="gt_row gt_right gt_striped">25</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Tom Brady</td>
-<td headers="touchdowns" class="gt_row gt_right">25</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Trevor Lawrence*</td>
-<td headers="touchdowns" class="gt_row gt_right gt_striped">25</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Tua Tagovailoa</td>
-<td headers="touchdowns" class="gt_row gt_right">25</td></tr>
-  </tbody>
-  <tfoot class="gt_sourcenotes">
-    <tr>
-      <td class="gt_sourcenote" colspan="2"><strong>By:</strong> Jackson Reddick  |  <strong>Source:</strong> Pro Football Reference</td>
-    </tr>
-  </tfoot>
-  
-</table>
-</div>
-</div>
-</div>
-<p>So looking at this you’d think, eh Goff played a good year, but 29 touchdowns on a top ten NFL offense, where did all the other touchdowns go?</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>logs2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"nfl2022rbs.csv"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>touchdowns2 <span class="ot">&lt;-</span> logs2 <span class="sc">|&gt;</span> </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Player) <span class="sc">|&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">touchdowns=</span><span class="fu">sum</span>(TD)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>touchdowns) <span class="sc">|&gt;</span> </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">desc</span>(touchdowns))</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>touchdowns2 <span class="sc">|&gt;</span> </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">touchdowns =</span> <span class="st">"Rushing Touchdowns"</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"2022 Top Ten NFL RB Rushing TDs"</span>,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"So Jared Goff could have thrown a lot more touchdowns..."</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> <span class="fu">tab_style</span>(</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Jackson Reddick  |  **Source:** Pro Football Reference"</span>)</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">12</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#0076B6"</span>),</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Jamaal Williams"</span>)</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-
-<div id="edfoatmawh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#edfoatmawh table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#edfoatmawh thead, #edfoatmawh tbody, #edfoatmawh tfoot, #edfoatmawh tr, #edfoatmawh td, #edfoatmawh th {
-  border-style: none;
-}
-
-#edfoatmawh p {
-  margin: 0;
-  padding: 0;
-}
-
-#edfoatmawh .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: none;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#edfoatmawh .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#edfoatmawh .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#edfoatmawh .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#edfoatmawh .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#edfoatmawh .gt_bottom_border {
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#edfoatmawh .gt_col_headings {
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#edfoatmawh .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#edfoatmawh .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#edfoatmawh .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#edfoatmawh .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#edfoatmawh .gt_column_spanner {
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#edfoatmawh .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#edfoatmawh .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#edfoatmawh .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#edfoatmawh .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#edfoatmawh .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#edfoatmawh .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: none;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#edfoatmawh .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#edfoatmawh .gt_stub_row_group {
+#fkbykjwxpu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1190,15 +1158,15 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   vertical-align: top;
 }
 
-#edfoatmawh .gt_row_group_first td {
+#fkbykjwxpu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#edfoatmawh .gt_row_group_first th {
+#fkbykjwxpu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#edfoatmawh .gt_summary_row {
+#fkbykjwxpu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1208,16 +1176,16 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 5px;
 }
 
-#edfoatmawh .gt_first_summary_row {
+#fkbykjwxpu .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_first_summary_row.thick {
+#fkbykjwxpu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#edfoatmawh .gt_last_summary_row {
+#fkbykjwxpu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1227,7 +1195,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_grand_summary_row {
+#fkbykjwxpu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1237,7 +1205,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 5px;
 }
 
-#edfoatmawh .gt_first_grand_summary_row {
+#fkbykjwxpu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1247,7 +1215,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_last_grand_summary_row_top {
+#fkbykjwxpu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1257,11 +1225,11 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_striped {
+#fkbykjwxpu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#edfoatmawh .gt_table_body {
+#fkbykjwxpu .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1270,7 +1238,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_footnotes {
+#fkbykjwxpu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1284,7 +1252,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_footnote {
+#fkbykjwxpu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1293,7 +1261,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 5px;
 }
 
-#edfoatmawh .gt_sourcenotes {
+#fkbykjwxpu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1307,7 +1275,7 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#edfoatmawh .gt_sourcenote {
+#fkbykjwxpu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1315,63 +1283,63 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
   padding-right: 5px;
 }
 
-#edfoatmawh .gt_left {
+#fkbykjwxpu .gt_left {
   text-align: left;
 }
 
-#edfoatmawh .gt_center {
+#fkbykjwxpu .gt_center {
   text-align: center;
 }
 
-#edfoatmawh .gt_right {
+#fkbykjwxpu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#edfoatmawh .gt_font_normal {
+#fkbykjwxpu .gt_font_normal {
   font-weight: normal;
 }
 
-#edfoatmawh .gt_font_bold {
+#fkbykjwxpu .gt_font_bold {
   font-weight: bold;
 }
 
-#edfoatmawh .gt_font_italic {
+#fkbykjwxpu .gt_font_italic {
   font-style: italic;
 }
 
-#edfoatmawh .gt_super {
+#fkbykjwxpu .gt_super {
   font-size: 65%;
 }
 
-#edfoatmawh .gt_footnote_marks {
+#fkbykjwxpu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#edfoatmawh .gt_asterisk {
+#fkbykjwxpu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#edfoatmawh .gt_indent_1 {
+#fkbykjwxpu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#edfoatmawh .gt_indent_2 {
+#fkbykjwxpu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#edfoatmawh .gt_indent_3 {
+#fkbykjwxpu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#edfoatmawh .gt_indent_4 {
+#fkbykjwxpu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#edfoatmawh .gt_indent_5 {
+#fkbykjwxpu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1393,21 +1361,21 @@ F-statistic: 4.944 on 1 and 25 DF,  p-value: 0.03546</code></pre>
 <td headers="touchdowns" class="gt_row gt_right" style="background-color: #0076B6; color: #FFFFFF;">17</td></tr>
     <tr><td headers="Player" class="gt_row gt_left gt_striped">Austin Ekeler</td>
 <td headers="touchdowns" class="gt_row gt_right gt_striped">13</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Derrick Henry*</td>
+    <tr><td headers="Player" class="gt_row gt_left">Derrick Henry</td>
 <td headers="touchdowns" class="gt_row gt_right">13</td></tr>
     <tr><td headers="Player" class="gt_row gt_left gt_striped">Ezekiel Elliott</td>
 <td headers="touchdowns" class="gt_row gt_right gt_striped">12</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Josh Jacobs*+</td>
+    <tr><td headers="Player" class="gt_row gt_left">Josh Jacobs</td>
 <td headers="touchdowns" class="gt_row gt_right">12</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Nick Chubb*</td>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Nick Chubb</td>
 <td headers="touchdowns" class="gt_row gt_right gt_striped">12</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left">Miles Sanders*</td>
+    <tr><td headers="Player" class="gt_row gt_left">Miles Sanders</td>
 <td headers="touchdowns" class="gt_row gt_right">11</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Saquon Barkley*</td>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Saquon Barkley</td>
 <td headers="touchdowns" class="gt_row gt_right gt_striped">10</td></tr>
     <tr><td headers="Player" class="gt_row gt_left">Kenneth Walker III</td>
 <td headers="touchdowns" class="gt_row gt_right">9</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Tony Pollard*</td>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped">Tony Pollard</td>
 <td headers="touchdowns" class="gt_row gt_right gt_striped">9</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
